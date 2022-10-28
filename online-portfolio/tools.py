@@ -25,3 +25,5 @@ def get_data(list_of_coins: list, start_from: str, end_to: str, source_of_data: 
         s.append(web.DataReader(chunk, source_of_data, start=start_from, end=end_to)['Adj Close'])
     s = pd.concat(s, axis=1)
     s.to_csv(f'data/data from {start_from} to {end_to}.csv', index=False)
+
+# get_data(list_of_coins=coin_list, start_from=start_time,end_to=end_time,source_of_data=data_source)
