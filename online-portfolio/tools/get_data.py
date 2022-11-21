@@ -19,7 +19,7 @@ def get_data(list_of_coins: list, start_from: str, end_to: str, source_of_data: 
     :return dataframe which includes daily close price
     """
     s = []
-    # loading data in chunks from Yahoo is more robust than loading everything at once
+    # loading datasets in chunks from Yahoo is more robust than loading everything at once
     for i, chunk in enumerate(np.array_split(list_of_coins, 5)):
         print(f'Loading chunk {i}')
         s.append(web.DataReader(chunk, source_of_data, start=start_from, end=end_to)['Adj Close'])
