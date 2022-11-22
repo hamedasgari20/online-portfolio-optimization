@@ -27,3 +27,23 @@ def get_data(list_of_coins: list, start_from: str, end_to: str, source_of_data: 
     s.to_csv(f'data/data from {start_from} to {end_to}.csv', index=False)
 
 # get_data(list_of_coins=coin_list, start_from=start_time,end_to=end_time,source_of_data=data_source)
+
+# todo check sonarlint suggestions
+def transaction_cost(W):
+    TC = 0
+    for i in range(len(W)-1):
+        for j in range(len(W.columns)):
+            # todo transaction cost must be calculated based on transaction fee
+            TC = TC + abs(W.iloc[i, j]-W.iloc[i+1, j])
+    return TC
+
+
+
+def portfolio_return(W, R):
+    multi = W.mul(R)
+    return multi.sum().sum()
+
+
+def sortino_ratio(W, R):
+    # todo calculate portfolio sortino ratio
+    pass
