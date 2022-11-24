@@ -1,6 +1,7 @@
 
 def highest_performing_strategy(S):
-    R = S / S.shift(1)
+    # todo rate_of_return function must be imported here
+    R = (S / S.shift(1)) - 1
     highest_return_symbol = R.idxmax(axis=1).shift(1)
     # construct weights
     W_mom = S * 0

@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import pandas_datareader.data as web
 
-coin_list = ["BTC-USD", "ETH-USD", "BNB-USD", "XRP-USD", "ADA-USD", "SOL-USD", "DOGE-USD", "MATIC-USD", "DOT-USD", "TRX-USD"]
+coin_list = ["BTC-USD", "ETH-USD", "BNB-USD", "XRP-USD", "ADA-USD", "SOL-USD", "DOGE-USD", "MATIC-USD", "DOT-USD",
+             "TRX-USD"]
 start_time = '2021-01-01'
 end_time = '2021-10-27'
 data_source = 'yahoo'
@@ -26,24 +27,41 @@ def get_data(list_of_coins: list, start_from: str, end_to: str, source_of_data: 
     s = pd.concat(s, axis=1)
     s.to_csv(f'data/data from {start_from} to {end_to}.csv', index=False)
 
+
 # get_data(list_of_coins=coin_list, start_from=start_time,end_to=end_time,source_of_data=data_source)
 
 # todo check sonarlint suggestions
+
+def rate_of_return(S):
+    # todo double check calculation
+    R = (S / S.shift(1)) - 1
+    return R
+
+
 def transaction_cost(W):
+    # todo double check calculation
     TC = 0
-    for i in range(len(W)-1):
+    for i in range(len(W) - 1):
         for j in range(len(W.columns)):
             # todo transaction cost must be calculated based on transaction fee
-            TC = TC + abs(W.iloc[i, j]-W.iloc[i+1, j])
+            TC = TC + abs(W.iloc[i, j] - W.iloc[i + 1, j])
     return TC
 
 
-
 def portfolio_return(W, R):
+    # todo double check calculation
     multi = W.mul(R)
     return multi.sum().sum()
 
 
 def sortino_ratio(W, R):
     # todo calculate portfolio sortino ratio
-    pass
+    # todo risk free rate must be considerred
+    # todo double check calculation
+    multi = W.mul(R)
+    std_neg = multi[multi < 0].std()
+    a = multi.sum()
+    b = a / std_neg
+    return b.sum()
+
+
