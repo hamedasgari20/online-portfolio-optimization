@@ -1,32 +1,26 @@
-# todo check sonarlint suggestions
-# import libraries
-from tools import *
+from tools import rate_of_return, transaction_cost, portfolio_return, sortino_ratio
 import pandas as pd
-from algorithms import best_performing, worst_performing
+from algorithms import best_performing
 
-# Step 1: Read required dataset
-S = pd.read_csv('datasets/test_data_2.csv')
-R = rate_of_return(S)
-
+# Step 1: Select required dataset from directory datasets
+S = pd.read_csv('datasets/test_data_1.csv')
 
 
-# Step 2: Run each strategy on dataset to obtain weight matrix
-W = best_performing.highest_performing_strategy(S)
-# W = worst_performing.worst_performing_strategy(S)
+# Step 2: Select strategy to obtain weight matrix
+W = best_performing.strategy(S)
 
 
 # Step 3: Save weights of each strategy
-W.to_csv(f'weights/weights of strategy best_performing.csv', index=False)
-# print(W)
+W.to_csv(f'weights/weights of strategy', index=False)
 
 
-
-# Step 4: Calculate performance of each strategy (transaction cost & Sortino Ratio)
-TC = transaction_cost(W)
+# Step 4: Calculate performance of each strategy (transaction cost & sortino ratio & rate of return)
+R = rate_of_return(S)
+TC = transaction_cost(W, alfa=0.005)
 ROR = portfolio_return(W, R)
-SORTINO_RATIO = sortino_ratio(W, R)
+SORTINO_RATIO = sortino_ratio(W, R, risk_free_rate=0)
 
-print(f'sortino ratio is: '+ str(SORTINO_RATIO))
-print(f'transaction cost is: '+ str(TC))
-# todo double check each calculations
 
+print(f'transaction cost (%) initial deposit: ' + str(round(TC, 3)))
+print(f'sortino ratio is: ' + str(round(SORTINO_RATIO, 3)))
+print(f'rate of return portfolio (%) initial deposit: ' + str(round(ROR, 3)))

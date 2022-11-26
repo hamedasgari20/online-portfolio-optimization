@@ -1,10 +1,15 @@
+def strategy(s):
+    """
+    Description: This strategy invests in the coin with the highest return at each stage
+    :parameter
+    :param s: Initial dataframe
 
-def highest_performing_strategy(S):
-    # todo rate_of_return function must be imported here
-    R = (S / S.shift(1)) - 1
-    highest_return_symbol = R.idxmax(axis=1).shift(1)
+    :return matrix weights
+    """
+    r = (s / s.shift(1)) - 1
+    highest_return_symbol = r.idxmax(axis=1).shift(1)
     # construct weights
-    W_mom = S * 0
-    for col in R.columns:
-        W_mom.loc[highest_return_symbol == col, col] = 1
-    return W_mom
+    w_mom = s * 0
+    for col in r.columns:
+        w_mom.loc[highest_return_symbol == col, col] = 1
+    return w_mom

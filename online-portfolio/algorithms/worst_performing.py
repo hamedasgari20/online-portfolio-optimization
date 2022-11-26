@@ -1,10 +1,16 @@
 
-def worst_performing_strategy(S):
-    # todo rate_of_return function must be imported here
-    R = (S / S.shift(1)) - 1
-    lower_return_symbol = R.idxmin(axis=1).shift(1)
+def strategy(s):
+    """
+    Description: This strategy invests in the coin with the lowest return at each stage
+    :parameter
+    :param s: Initial dataframe
+
+    :return matrix weights
+    """
+    r = (s / s.shift(1)) - 1
+    lower_return_symbol = r.idxmin(axis=1).shift(1)
     # construct weights
-    W_rev = S * 0
-    for col in R.columns:
-        W_rev.loc[lower_return_symbol == col, col] = 1
-    return W_rev
+    w_rev = s * 0
+    for col in r.columns:
+        w_rev.loc[lower_return_symbol == col, col] = 1
+    return w_rev
