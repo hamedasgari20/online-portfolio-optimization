@@ -16,7 +16,7 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 #### Fetching required data
-The required data can be stored in the data directory with the following command.
+The required data can be stored in the datasets directory with the following command. This commands is in the ```tools.py```file.
 ```angular2html
 from online-portfolio.tools import get_data
 
@@ -29,4 +29,11 @@ data_source = 'yahoo'
 # Fetch data and stores in directory data
 get_data(coin_list, start_time,end_time,data_source)
 
+```
+#### Run ```python main.py``` to run required strategy on each datasets. In step 1 and 2 in this file required dataset and strategy can be selected.
+results of each strategy is shown in terminal such as below.
+```angular2html
+transaction cost (%) initial deposit: 0.035
+sortino ratio is: 3.583
+rate of return portfolio (%) initial deposit: 0.334
 ```
