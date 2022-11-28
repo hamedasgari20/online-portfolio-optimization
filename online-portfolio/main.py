@@ -11,11 +11,12 @@ W = buy_and_hold.strategy(S)
 
 
 # Step 3: Save weights of each strategy
-W.to_csv(f'weights/weights of strategy', index=False)
+W.to_csv(f'weights/weights of strategy.csv', index=False)
 
 
 # Step 4: Calculate performance of each strategy (transaction cost & sortino ratio & rate of return)
 R = rate_of_return(S)
+# R.to_csv(f'R.csv', index=False)
 TC = transaction_cost(W, alfa=0.005)
 ROR = portfolio_return(W, R)
 SORTINO_RATIO = sortino_ratio(W, R, risk_free_rate=0)
