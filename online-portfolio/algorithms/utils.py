@@ -39,18 +39,15 @@ def nsga2(s, w, i,  population, max_gen):
     gen_no = 0
     solution = initial_solution(population, s)
     while (gen_no < max_gen):
-        print(solution)
-        print(solution.loc[i, :])
-        print(w.loc[i-1, :])
+        # print(solution)
         objective1_values = [objective1(solution.loc[j, :], r.loc[j, :]) for j in range(0, population)]
         objective2_values = [objective2(w.loc[i-1, :], solution.loc[k, :]) for k in range(0, population)]
 
-        print(objective1_values, objective2_values)
 
 
 
         gen_no = gen_no + 1
-    return solution
+    return solution.iloc[2, :]
 
 
 
