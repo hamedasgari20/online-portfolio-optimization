@@ -1,13 +1,14 @@
 from tools import rate_of_return, transaction_cost, portfolio_return, sortino_ratio
 import pandas as pd
-from algorithms import buy_and_hold
+from algorithms import nsga2
+
 
 # Step 1: Select required dataset from directory datasets
 S = pd.read_csv('datasets/test_data_1.csv')
 
 
 # Step 2: Select strategy to obtain weight matrix
-W = buy_and_hold.strategy(S)
+W = nsga2.strategy(S)
 
 
 # Step 3: Save weights of each strategy

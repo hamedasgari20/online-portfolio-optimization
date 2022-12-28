@@ -1,4 +1,3 @@
-import time
 from utils import *
 
 
@@ -10,6 +9,7 @@ def strategy(s):
 
     for i in range(1, len(s)):
         # for each row in matrix s find nsga2 result and save it in w
+        solution = []
         obj1, obj2, solution = nsga2(s, w.iloc[i-1, :], r.iloc[i, :], i, population=3, max_gen=1)
         # # In each step pareto layer can seen we two lines below
         # non_dominating_curve_plotter(obj1, obj2)
@@ -17,11 +17,15 @@ def strategy(s):
         # TODO find similar w with previous w between best solution found solution[0] is not correct
         minpos = obj2.index(min(obj2))
         w.iloc[i] = solution[minpos]
-        print("....................................................")
+        # print("....................................................")
         # print("min pos TC is {}".format(minpos))
         # print(solution)
         # print(obj1, obj2, solution[minpos])
-        print(w)
-        print(".....................................................")
+        # print(w)
+        # print(obj1)
+        # print(obj2)
+        # print(solution)
+        # print(".....................................................")
     return w
 result = strategy(s)
+print(result)
