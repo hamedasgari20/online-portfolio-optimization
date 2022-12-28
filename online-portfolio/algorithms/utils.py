@@ -135,19 +135,8 @@ def nsga2(s, w, r, i,  population, max_gen):
         # print(solution)
         objective1_values = [objective1(solution.loc[j, :], r) for j in range(0, population)]
         objective2_values = [objective2(w, solution.loc[k, :]) for k in range(0, population)]
-        # print(objective2_values)
-        # print('ok')
-        # objective1_values = [float(i) / sum(objective1_values_un_normal) for i in objective1_values_un_normal]
-        # objective2_values = [float(i) / sum(objective2_values_un_normal) for i in objective2_values_un_normal]
-
 
         non_dominated_sorted_solution = non_dominated_sorting_algorithm(objective1_values[:], objective2_values[:])
-        # print('Best Front for Generation:', gen_no)
-        # for values in non_dominated_sorted_solution[0]:
-        #     print(values)
-        #     print(round(solution.iloc[values, :], 3), end=" ")
-        # print("\n")
-
 
         crowding_distance_values = []
         for i in range(0, len(non_dominated_sorted_solution)):
@@ -183,7 +172,7 @@ def nsga2(s, w, r, i,  population, max_gen):
                     break
             if (len(new_solution) == population):
                 break
-        solution = [solution2.iloc[i, :] for i in new_solution]
+        solution.iloc[:, :] = [solution2.iloc[i, :] for i in new_solution]
         obj1 = [objective1(solution[j], r) for j in range(0, population)]
         obj2 = [objective2(w, solution[k]) for k in range(0, population)]
         # todo this solution must be return as final solution in each iteration
